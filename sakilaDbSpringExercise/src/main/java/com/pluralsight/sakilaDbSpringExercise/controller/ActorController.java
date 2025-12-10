@@ -16,36 +16,49 @@ public class ActorController {
         this.actorService = actorService;
     }
 
+    //http://localhost:8080/actor
     @GetMapping
         public List<Actor> getAllActors() {
         return actorService.getAllActors();
         }
 
-    @GetMapping("/first/{first}")
-        public List<Actor> getActorByFirstName(@PathVariable String first) {
+    //http://localhost:8080/actor/search/by-first?first=Penelope
+    @GetMapping("search/by-first")
+        public List<Actor> getActorByFirstName(@RequestParam (required = false) String first) {
             return actorService.getActorByFirstName(first);
         }
 
-    @GetMapping("/last/{last}")
-    public List<Actor> getActorByLastName(@PathVariable String last) {
+    //http://localhost:8080/actor/search/by-last?last=Guiness
+    @GetMapping("search/by-last")
+    public List<Actor> getActorByLastName(@RequestParam (required = false) String last) {
         return actorService.getActorByLastName(last);
     }
 
+    //http://localhost:8080/actor/search?first=penelope&last=guiness
+    @GetMapping("search")
+    public List<Actor> getActorFullName(@RequestParam (required = false) String first, @RequestParam (required = false) String last){
+        return  actorService.getActorByFullName(first, last);
+    }
+
+    //http://localhost:8080/actor/id/200
     @GetMapping("/id/{id}")
     public Actor getActorById(@PathVariable int id){
         return actorService.getActorById(id);
     }
 
+    // use insomnia
     @PostMapping
     public Actor addActor(@RequestBody Actor actor){
         return actorService.addActor(actor);
     }
 
+    // use insomnia
     @PutMapping("{id}")
     public void updateActor(@PathVariable int id, @RequestBody Actor actor){
         actorService.updateActor(id, actor);
     }
 
+    // use insomnia
     @DeleteMapping("{id}")
     public void deleteActor(@PathVariable int id){
         actorService.deleteActor(id);

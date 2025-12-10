@@ -76,8 +76,6 @@ public class ActorDaoImpl implements ActorDao{
                     actors.add(new Actor(firstName, lastName));
                 }
             }
-
-
         } catch(SQLException e) {
             throw new RuntimeException(e);
         }
@@ -100,6 +98,30 @@ public class ActorDaoImpl implements ActorDao{
                 }
             }
 
+        } catch(SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return actors;
+    }
+
+    @Override
+    public List<Actor> getActorByFullName(String first, String last) {
+        List<Actor> actors = new ArrayList<>();
+        String query = "SELECT * FROM Actor WHERE first_Name = ? AND last_name = ?";
+
+        try(Connection connection = dataSource.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        ) { preparedStatement.setString(1, first);
+            preparedStatement.setString(2, last);
+            try(ResultSet resultSet = preparedStatement.executeQuery()) {
+
+                while (resultSet.next()) {
+                    String firstName = resultSet.getString("first_Name");
+                    String lastName = resultSet.getString("last_Name");
+
+                    actors.add(new Actor(firstName, lastName));
+                }
+            }
         } catch(SQLException e) {
             throw new RuntimeException(e);
         }

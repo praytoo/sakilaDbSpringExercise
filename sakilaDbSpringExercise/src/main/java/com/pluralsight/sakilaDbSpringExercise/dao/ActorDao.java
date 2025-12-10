@@ -9,6 +9,7 @@ public interface ActorDao {
     Actor getActorById(int id);
     List<Actor> getActorByFirstName(String first);
     List<Actor> getActorByLastName(String last);
+    List<Actor> getActorByFullName(String first, String last);
     Actor addActor(Actor actor);
     void updateActor(int id, Actor actor);
     void deleteActor(int id);

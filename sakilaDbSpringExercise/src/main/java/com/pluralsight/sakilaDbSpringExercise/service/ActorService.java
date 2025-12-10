@@ -26,6 +26,11 @@ public class ActorService {
         return actorDao.getActorByLastName(lastName);
     }
 
+    public List<Actor> getActorByFullName(String first, String last){
+        return actorDao.getActorByFullName(first, last);
+    }
+
+
     public Actor addActor(Actor actor) {
         return actorDao.addActor(actor);
     }
