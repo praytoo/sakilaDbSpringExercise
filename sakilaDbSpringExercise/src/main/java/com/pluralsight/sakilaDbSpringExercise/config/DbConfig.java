@@ -1,4 +1,4 @@
-package com.pluralsight.sakilaDbSpringExercise;
+package com.pluralsight.sakilaDbSpringExercise.config;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,8 +1,23 @@
-package com.pluralsight.sakilaDbSpringExercise;
+package com.pluralsight.sakilaDbSpringExercise.model;
 
 public class Actor {
     private String firstName;
     private String lastName;
+    private int id;
+
+    public Actor(int id,String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Actor() {
     }
