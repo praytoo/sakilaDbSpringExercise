@@ -138,4 +138,23 @@ public class FilmDaoImpl implements FilmDao{
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public Film getFilmByTitle(String title) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM film WHERE title = ?;");
+        ) {
+            preparedStatement.setString(1, title);
+
+            try(ResultSet resultSet = preparedStatement.executeQuery();) {
+                while (resultSet.next()) {
+                    Film film = new Film(resultSet.getInt("film_id"), resultSet.getString("title"), resultSet.getString("description"), resultSet.getInt("release_year"), resultSet.getInt("language_id"), resultSet.getInt("length"), resultSet.getString("rating"));
+                    return film;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
 }

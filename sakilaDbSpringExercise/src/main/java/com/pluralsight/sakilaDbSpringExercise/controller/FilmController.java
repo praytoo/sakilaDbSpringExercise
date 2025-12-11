@@ -44,4 +44,10 @@ public class FilmController {
     public void deleteFilm(@PathVariable int id){
         filmService.deleteFilm(id);
     }
+
+    //http://localhost:8080/film/search/by-title?title=ACADEMY
+    @GetMapping("search/by-title")
+    public Film getFilmByTitle(@RequestParam (required = false) String title) {
+        return filmService.getFilmByTitle(title);
+    }
 }

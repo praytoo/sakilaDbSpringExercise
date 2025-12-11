@@ -28,4 +28,7 @@ public class FilmService {
     public void deleteFilm(int id){
         filmDao.deleteFilm(id);
     }
+    public Film getFilmByTitle(String title){
+        return filmDao.getFilmByTitle(title);
+    }
 }
