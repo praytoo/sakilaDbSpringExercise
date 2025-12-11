@@ -74,4 +74,7 @@ public class Film {
         this.length = length;
         this.rating = rating;
     }
+
+    public Film() {
+    }
 }

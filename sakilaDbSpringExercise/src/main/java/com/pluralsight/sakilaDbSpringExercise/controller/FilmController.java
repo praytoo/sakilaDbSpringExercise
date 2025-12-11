@@ -3,6 +3,7 @@ package com.pluralsight.sakilaDbSpringExercise.controller;
 import com.pluralsight.sakilaDbSpringExercise.model.Actor;
 import com.pluralsight.sakilaDbSpringExercise.model.Film;
 import com.pluralsight.sakilaDbSpringExercise.service.FilmService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,8 +24,12 @@ public class FilmController {
 
     //http://localhost:8080/film/id/200
     @GetMapping("/id/{id}")
-    public Film getFilmById(@PathVariable int id){
-        return filmService.getFilmById(id);
+    public ResponseEntity<Film> getFilmById(@PathVariable int id){
+        Film film = filmService.getFilmById(id);
+        if (film == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(film);
     }
 
     // use insomnia
